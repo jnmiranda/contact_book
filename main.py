@@ -13,9 +13,9 @@ cur = con.cursor()
 #Checks if the database already exists, if not, creates it
 if db_exists == False:
     cur.execute("CREATE TABLE contacts (name text, phone_number text, email text, address text)")
-    cur.execute("INSERT INTO contacts VALUES ('João Miranda', '916660379', 'jomiranda710@gmail.com', 'Rua do Vale do Lobo, Montemor-o-Velho')")
-    cur.execute("INSERT INTO contacts VALUES ('Miguel Torres', '9111111111', 'miki_torres@gmail.com', 'Rua, Santo Varão')")
-    cur.execute("INSERT INTO contacts VALUES ('Lara Trindade', '912222222', 'lara_micaela_trindade2@gmail.com', 'Rua Carminé Miranda, Coimbra')")
+    cur.execute("INSERT INTO contacts VALUES ('Arthur Morgan', '987784987', 'arthur_morgan@email.com', 'Red Dead Redemption Street')")
+    cur.execute("INSERT INTO contacts VALUES ('Link', '911111111', 'hero_of_hyrule@email.com', 'The Legend of Zelda Street')")
+    cur.execute("INSERT INTO contacts VALUES ('Red', '786473637', 'silent_kid@email.com', 'Pallet Town, Kanto')")
     con.commit()
 
 
