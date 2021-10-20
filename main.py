@@ -1,6 +1,26 @@
+import sqlite3
+from os.path import exists
+
 from classes.Person import Person
 
+
 def setup(contacts: list):
+    # Check if DB already exists, if not, creates it
+    db_exists = exists('contacts.db')
+    if db_exists == False:
+        print('CREATE DB')
+        con = sqlite3.connect('contacts.db')
+        cur = con.cursor()
+        cur.execute("CREATE TABLE contacts (name text, phone_number text, email text, address text)")
+        cur.execute("INSERT INTO contacts VALUES ('João Miranda', '916660379', 'jomiranda710@gmail.com', 'Rua do Vale do Lobo, Montemor-o-Velho')")
+        cur.execute("INSERT INTO contacts VALUES ('Miguel Torres', '9111111111', 'miki_torres@gmail.com', 'Rua, Santo Varão')")
+        cur.execute("INSERT INTO contacts VALUES ('Lara Trindade', '912222222', 'lara_micaela_trindade2@gmail.com', 'Rua Carminé Miranda, Coimbra')")
+        con.commit()
+    else:
+        print('I EXIST')
+
+
+'''
     joao = Person('João Miranda', '916660379', 'jomiranda710@gmail.com', 'Rua do Vale do Logo, Montemor-o-Velho')
     miguel = Person('Miguel Torres', '9111111111', 'miki_torres@gmail.com', 'Rua, Santo Varão')
     lara = Person('Lara Trindade', '912222222', 'lara_micaela_trindade2@gmail.com', 'Rua Carminé Miranda, Coimbra')
@@ -8,7 +28,7 @@ def setup(contacts: list):
     contacts.append(joao)
     contacts.append(miguel)
     contacts.append(lara)
-
+'''
 
 def show_contact_list(contacts: list):
     print('----------Contact List----------')
@@ -52,18 +72,18 @@ def menu(contacts: list):
 
         # Contact List
         if option == 1:
-            show_contact_list(contacts)
-            pass
+            if len(contacts) == 0:
+                print('Your Contact list is empty')
+            else:
+                show_contact_list(contacts)
             
         # Add Contact
         elif option == 2:
             add_contact(contacts)
-            pass
 
         # Delete Contact
         elif option == 3:
             delete_contact(contacts)
-            pass
 
         # Exit
         elif option == 0:
@@ -75,9 +95,9 @@ def menu(contacts: list):
             print(unavailable_option())
 
 
-
-
 if __name__ == '__main__':
     contacts = []
+
     setup(contacts)
+
     menu(contacts)
